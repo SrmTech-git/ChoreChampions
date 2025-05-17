@@ -1,0 +1,76 @@
+/* Add these styles to reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Modify your root element */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Your grid should be full width */
+.App {
+  display: grid;
+  grid-template-areas: 
+    "NavBar"
+    "Main"
+    "Footer";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.Navbar {
+  grid-area: NavBar;
+}
+.MainContent {
+  grid-area: Main;
+}
+.Footer {
+  grid-area: Footer;
+}
+
+/* Main content styles */
+.MainContent {
+  grid-area: Main;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 2rem 0; /* Only add vertical padding */
+}
+
+button {
+  background-color: #3ba13e; /* Green */
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+  button:hover {
+    background-color: #b7ffbb;
+  }
