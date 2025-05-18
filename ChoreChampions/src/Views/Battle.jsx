@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useUserContext } from "../UserContext";
 
 function Battle() {
     // Get state from router
     const location = useLocation();
     const { currentUser, opponent } = location.state || {};
+    
+    // Access user context to update points
+    const { setUserPoints } = useUserContext();
+    
+    useEffect(() => {
+        // Determine the winner first
+        if (currentUser && opponent) {
+            // Reset user points to 0 after battle is complete
+            setUserPoints(0);
+        }
+    }, [currentUser, opponent, setUserPoints]);
     
     if (!currentUser || !opponent) {
         console.log("Battle state:", location.state);
@@ -33,6 +45,7 @@ function Battle() {
                 <strong>{opponent.name}</strong>: {opponentPoints} points
             </div>
             <h3>{winnerText}</h3>
+            <p>Your points have been reset to 0 after the battle.</p>
         </div>
     );
 }

@@ -3,7 +3,7 @@ nav {
     padding: 1rem 0;
 }
 
-ul {
+.navLinks {
     list-style: none;
     display: flex;
     justify-content: center;
@@ -11,7 +11,7 @@ ul {
     padding: 0;
 }
 
-li {
+navLink {
     margin: 0 1.5rem;
 }
 
@@ -21,6 +21,7 @@ a {
     font-weight: 500;
     font-size: 1.1rem;
     transition: color 0.2s;
+    margin: 0 1.5em;
 }
 
 a:hover {

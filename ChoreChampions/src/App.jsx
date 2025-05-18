@@ -10,8 +10,12 @@ import ChoreList from './Views/ChoreList'
 import Dashboard from './Views/Dashboard'
 import Challenge from './Views/Challenge'
 import Battle from './Views/Battle'
+import Login from './Views/Login'
+import Register from './Views/Register'
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './UserContext'
+
+
 
 function App() {
   return (
@@ -29,6 +33,8 @@ function App() {
               <Route path="/ChoreList" element={<ChoreList />} />
               <Route path="/Challenge" element={<Challenge/>} />
               <Route path="/Battle" element={<Battle/> }/>
+              <Route path="/Login" element={<Login/> }/>
+              <Route path="/Register" element={<Register/> }/>
             </Routes>
           </div>
 
