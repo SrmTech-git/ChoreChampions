@@ -1,82 +1,127 @@
 import React, { useState } from 'react';
 import { useUserContext } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
+import Store from '../Components/Store';
 
 // Example users data (replace with real data or props)
 const usersList = [
-    { id: 4, name: 'Alice', points: 15 },
-    { id: 2, name: 'Bob', points: 20 },
-    { id: 3, name: 'Charlie', points: 30 },
+    { name: 'Alice', userId: 4, points: 15, houseHoldId: 1 },
+    { name: 'Bob', userId: 2, points: 20, houseHoldId: 1 },
+    { name: 'Charlie', userId: 3, points: 30, houseHoldId: 2 },
+    { name: 'Shan', userId: 1, points: 5, houseHoldId: 1 },
 ];
 
 function Challenge() {
-    const { user, userPoints } = useUserContext();
-    const currentUserId = user.userId;
-    const [selectedUser, setSelectedUser] = useState(null);
+    const { 
+        user, 
+        userPoints, 
+        selectedWeapon
+    } = useUserContext();
+    
+    const [selectedOpponent, setSelectedOpponent] = useState(null);
     const navigate = useNavigate();
     
     // Filter out the current user
-    const otherUsers = usersList.filter(u => u.id !== parseInt(currentUserId));
+    const availableOpponents = usersList.filter(u => u.userId !== parseInt(user.userId));
 
-    const handleSelect = (otherUser) => {
-        setSelectedUser(otherUser);
-        // Optional feedback
-        // alert(`You challenged: ${otherUser.name}`);
+    const handleSelectOpponent = (opponent) => {
+        setSelectedOpponent(opponent);
     };
     
-    // In your Challenge component, ensure the user object has points
     const startBattle = () => {
-        if (!selectedUser) return;
+        if (!selectedOpponent) {
+            alert("Please select an opponent first!");
+            return;
+        }
         
-        // Make sure the current user has points (taking it from UserContext)
-        const currentUserWithPoints = {
+        // Prepare the current user data with points
+        const currentUserWithData = {
             ...user,
-            points: userPoints // Assuming userPoints is in your UserContext
+            points: userPoints,
+            weapon: selectedWeapon
         };
         
-        // Navigate to the Battle page with state (users info)
+        // Navigate to battle with state
         navigate('/Battle', { 
             state: { 
-                currentUser: currentUserWithPoints,
-                opponent: selectedUser
+                currentUser: currentUserWithData,
+                opponent: selectedOpponent
             }
         });
     };
 
     return (
-        <div>
-            <h2>Choose a user to battle:</h2>
-            <ul>
-                {otherUsers.map(otherUser => (
-                    <li key={otherUser.id}>
-                        <p>{otherUser.name}: {otherUser.points} points</p>
-                        <button
-                            onClick={() => handleSelect(otherUser)} 
-                            disabled={selectedUser && selectedUser.id === otherUser.id} 
-                        >
-                            {selectedUser && selectedUser.id === otherUser.id ? 'Selected' : 'Select'}
-                        </button>
-                    </li>
-                ))}
-            </ul>
+        <div className="challenge-page">
+            <h1>Battle Challenge</h1>
             
-            {selectedUser && (
-                <div>
-                    <h3>You have selected {selectedUser.name}!</h3>
-                    <p>Click the button below to start the battle!</p>
-                    <button
+            <div className="challenge-container">
+                <div className="opponents-section">
+                    <h2>Choose Your Opponent</h2>
+                    <ul className="opponents-list">
+                        {availableOpponents.map(opponent => (
+                            <li 
+                                key={opponent.userId} 
+                                className={`opponent-item ${selectedOpponent?.userId === opponent.userId ? 'selected' : ''}`}
+                                onClick={() => handleSelectOpponent(opponent)}
+                            >
+                                <div className="opponent-info">
+                                    <h3>{opponent.name}</h3>
+                                    
+                                </div>
+                                <div className="opponent-status">
+                                    {selectedOpponent?.userId === opponent.userId ? (
+                                        <span className="selected-opponent">SELECTED</span>
+                                    ) : (
+                                        <button className="select-opponent-btn">Select</button>
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    
+                    {availableOpponents.length === 0 && (
+                        <p className="no-opponents-message">No other users available to challenge.</p>
+                    )}
+                </div>
+
+                <div className="store-section">
+                    <Store />
+                </div>
+            </div>
+            
+            {selectedOpponent && (
+                <div className="battle-preparation">
+                    <h2>Ready For Battle?</h2>
+                    <div className="battle-summary">
+                        <div className="challenger">
+                            <h3>You: {user.name}</h3>
+                            <p>Points: {userPoints}</p>
+                            {selectedWeapon && (
+                                <p>Weapon: {selectedWeapon.name} (+{selectedWeapon.damage} damage)</p>
+                            )}
+                            <p>Total Power: {userPoints + (selectedWeapon ? selectedWeapon.damage : 0)}</p>
+                        </div>
+                        
+                        <div className="vs">VS</div>
+                        
+                        <div className="opponent">
+                            <h3>Opponent: {selectedOpponent.name}</h3>
+                            <p>Points: {selectedOpponent.points}</p>
+                            <p>Total Power: {selectedOpponent.points}</p>
+                        </div>
+                    </div>
+                    
+                    <button 
+                        className="start-battle-btn"
                         onClick={startBattle}
                     >
-                        Start Battle
+                        Start Battle!
                     </button>
                 </div>
-            )}
-            
-            {otherUsers.length === 0 && (
-                <p>No other users available to challenge.</p>
             )}
         </div>
     );
 }
 
 export default Challenge;
+
