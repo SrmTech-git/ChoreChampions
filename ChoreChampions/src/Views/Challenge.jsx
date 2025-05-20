@@ -2,21 +2,29 @@ import React, { useState } from 'react';
 import { useUserContext } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 import Store from '../Components/Store';
+import DisplayUser from '../Components/DisplayUser';
+import DisplayWeaponCard from '../Components/DisplayWeaponCard';
 
 // Example users data (replace with real data or props)
 const usersList = [
-    { name: 'Alice', userId: 4, points: 15, houseHoldId: 1 },
-    { name: 'Bob', userId: 2, points: 20, houseHoldId: 1 },
-    { name: 'Charlie', userId: 3, points: 30, houseHoldId: 2 },
-    { name: 'Shan', userId: 1, points: 5, houseHoldId: 1 },
+    { name: 'Alice', userId: 4, points: 15, houseHoldId: 1, image: 'public/alice.png' },
+    { name: 'Bob', userId: 2, points: 20, houseHoldId: 1, image: 'public/bob.png' },
+    { name: 'Charlie', userId: 3, points: 30, houseHoldId: 2, image: 'public/charlie.png' },
+    { name: 'Shan', userId: 1, points: 5, houseHoldId: 1, image: 'public/shan.png' },
 ];
 
 function Challenge() {
     const { 
         user, 
         userPoints, 
-        selectedWeapon
+        userTime, 
+        ownedItems, 
+        buyItem, 
+        selectedWeapon, 
+        setSelectedWeapon,
+        ITEMS 
     } = useUserContext();
+       
     
     const [selectedOpponent, setSelectedOpponent] = useState(null);
     const navigate = useNavigate();
@@ -59,21 +67,16 @@ function Challenge() {
                     <h2>Choose Your Opponent</h2>
                     <ul className="opponents-list">
                         {availableOpponents.map(opponent => (
-                            <li 
-                                key={opponent.userId} 
-                                className={`opponent-item ${selectedOpponent?.userId === opponent.userId ? 'selected' : ''}`}
-                                onClick={() => handleSelectOpponent(opponent)}
-                            >
-                                <div className="opponent-info">
-                                    <h3>{opponent.name}</h3>
-                                    
-                                </div>
-                                <div className="opponent-status">
-                                    {selectedOpponent?.userId === opponent.userId ? (
-                                        <span className="selected-opponent">SELECTED</span>
-                                    ) : (
-                                        <button className="select-opponent-btn">Select</button>
-                                    )}
+                            <li key={opponent.userId}>
+                                <div>
+                                    <DisplayUser user={opponent} />
+                                    <div className="opponent-status">
+                                        {selectedOpponent?.userId === opponent.userId ? (
+                                            <span className="selected-opponent">SELECTED</span>
+                                        ) : (
+                                            <button className="select-opponent-btn" onClick={() => handleSelectOpponent(opponent)}>Select</button>
+                                        )}
+                                    </div>
                                 </div>
                             </li>
                         ))}
@@ -85,7 +88,36 @@ function Challenge() {
                 </div>
 
                 <div className="store-section">
-                    <Store />
+                     {/* Owned Weapons Section */}
+            <div className="owned-weapons-section">
+                <h3>Your Arsenal - Choose One Weapon For Battle:</h3>
+                {ownedItems.length === 0 ? (
+                    <p className="no-weapons-message">You don't own any weapons yet. Purchase one from the store above!</p>
+                ) : (
+                    <ul className="owned-weapons-list">
+                        {ownedItems.map(item => (
+                            <DisplayWeaponCard weapon={item} buying={false} choosing={true}/>
+                        ))}
+                    </ul>
+                )}
+            </div>
+            
+            {/* Battle Weapon Summary */}
+            <div className="battle-weapon-summary">
+                <h3>Selected For Battle:</h3>
+                {selectedWeapon ? (
+                    <div className="selected-weapon-info">
+                        <p>
+                            <strong>{selectedWeapon.name}</strong> will give you a 
+                            <strong> +{selectedWeapon.damage} damage bonus</strong> in battle!
+                        </p>
+                    </div>
+                ) : (
+                    <p className="no-weapon-selected">
+                        No weapon selected. Your damage will be based on points only.
+                    </p>
+                )}
+            </div>
                 </div>
             </div>
             

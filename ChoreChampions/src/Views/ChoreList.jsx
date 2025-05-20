@@ -1,6 +1,7 @@
 // ChoreList.jsx
 import React from 'react';
 import { useUserContext } from '../UserContext';
+import DisplayChoreCard from '../Components/DisplayChoreCard';
 
 
 const CHORES = [
@@ -45,13 +46,7 @@ function ChoreList() {
             <ul>
                 {CHORES.map(chore => (
                     <li key={chore.id}>
-                        <strong>{chore.name}</strong> - {chore.time} mins - {chore.points} pts
-                        <button
-                            onClick={() => handleAddChore(chore)}
-                            disabled={userChores.some(c => c.id === chore.id)}
-                        >
-                            {userChores.some(c => c.id === chore.id) ? 'Added' : 'Add'}
-                        </button>
+                        <DisplayChoreCard chore={chore} canAdd={true} />
                     </li>
                 ))}
             </ul>
@@ -61,7 +56,7 @@ function ChoreList() {
                 {userChores.length === 0 && <li>No chores selected.</li>}
                 {userChores.map(chore => (
                     <li key={chore.id}>
-                        {chore.name} - {chore.time} mins - {chore.points} pts
+                        <DisplayChoreCard chore={chore} canAdd={false} canComplete={true}  canRemove={true}/>
                     </li>
                 ))}
             </ul>

@@ -12,6 +12,7 @@ import Challenge from './Views/Challenge'
 import Battle from './Views/Battle'
 import Login from './Views/Login'
 import Register from './Views/Register'
+import StoreView from './Views/StoreView'
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './UserContext'
 
@@ -35,6 +36,7 @@ function App() {
               <Route path="/Battle" element={<Battle/> }/>
               <Route path="/Login" element={<Login/> }/>
               <Route path="/Register" element={<Register/> }/>
+              <Route path= "/Store" element={<StoreView/> }/>
             </Routes>
           </div>
 

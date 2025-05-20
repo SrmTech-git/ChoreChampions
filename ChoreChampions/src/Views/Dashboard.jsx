@@ -1,6 +1,9 @@
 // Dashboard.jsx
 import React from 'react';
 import { useUserContext } from '../UserContext';
+import DisplayWeaponCard from '../Components/DisplayWeaponCard';
+import DisplayChoreCard from '../Components/DisplayChoreCard';
+
 
 function Dashboard() {
     const { 
@@ -26,9 +29,7 @@ function Dashboard() {
                     <ul>
                         {userChores.map(chore => (
                             <li key={chore.id}>
-                                <strong>{chore.name}</strong> - {chore.time} mins - {chore.points} pts
-                                <button onClick={() => handleCompleteChore(chore)}>Complete</button>
-                                <button onClick={() => handleRemoveChore(chore)}>Remove</button>
+                                <DisplayChoreCard chore={chore} canAdd={false} canComplete={true}  canRemove={true}/>
                             </li>
                         ))}
                     </ul>
@@ -38,13 +39,18 @@ function Dashboard() {
             <div>
                 <h3>Your weapons</h3>
                 {ownedItems.length === 0 ? (
-                    <p>No weapons owned yet. Go to the Store to buy some!</p>
+                    <p>No weapons owned yet. Go to the Challenge screen to see what you can buy!</p>
                 ) : (
                     <ul>
                         {ownedItems.map(item => (
                             <li key={item.id}>
-                                <strong>{item.name}</strong> - {item.damage} damage
-                                <button onClick={() => handleRemoveItem(item)}>Remove</button>
+                                <DisplayWeaponCard
+                                    weapon={item} 
+                                    buying={false} 
+                                    choosing={false}
+                                    canRemove={true}
+                                    
+                                />
                             </li>
                         ))}
                     </ul>

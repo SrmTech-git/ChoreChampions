@@ -30,6 +30,9 @@ function NavBar() {
                 <div className={styles.navLink}> 
                     <Link to="/Register">Register</Link>
                 </div>
+                <div className={styles.navLink}> 
+                    <Link to="/Store">Store</Link>
+                </div>
             </div>
 
             <div className="user-info">

@@ -1,20 +1,7 @@
 import React from 'react';
 import { useUserContext } from "../UserContext";
+import DisplayWeaponCard from './DisplayWeaponCard';
 
-const ITEMS = [
-    { id: 1, name: 'Wrapping Paper Tube', cost: 5, damage: 2, durability: 1, timeUsed: 0},
-    { id: 2, name: 'Giant Q-tip', cost: 20, damage: 4, durability: 2, timeUsed: 0 },
-    { id: 3, name: 'Rubber Chicken', cost: 30, damage: 6, durability: 1, timeUsed: 0 },
-    { id: 4, name: 'Silly String', cost: 15, damage: 3, durability: 2 , timeUsed: 0},
-    { id: 5, name: 'Water Balloon', cost: 25, damage: 5, durability: 1, timeUsed: 0 },
-    { id: 6, name: 'Feather Duster', cost: 10, damage: 2, durability: 3, timeUsed: 0 },
-    { id: 7, name: 'Bag of Laundry', cost: 12, damage: 1, durability: 4, timeUsed: 0 },
-    { id: 8, name: 'Confetti Cannon', cost: 40, damage: 8, durability: 1, timeUsed: 0 },
-    { id: 9, name: 'Feather Pillow', cost: 8, damage: 2, durability: 5, timeUsed: 0 },
-    { id: 10, name: 'Pool Noodle', cost: 6, damage: 2, durability: 3, timeUsed: 0 },
-    { id: 11, name: 'Giant Foam Finger', cost: 18, damage: 3, durability: 2, timeUsed: 0 },
-    { id: 12, name: 'Giant ToothBrush', cost: 22, damage: 4, durability: 3, timeUsed: 0 },
-];
 
 function Store() {
     const { 
@@ -22,7 +9,8 @@ function Store() {
         ownedItems, 
         buyItem, 
         selectedWeapon, 
-        setSelectedWeapon 
+        setSelectedWeapon,
+        ITEMS 
     } = useUserContext();
 
     function handleBuy(item) {
@@ -55,22 +43,7 @@ function Store() {
                         
                         return (
                             <li key={item.id} className="weapon-item">
-                                <div className="weapon-info">
-                                    <span className="weapon-name">{item.name}</span>
-                                    <span className="weapon-stats">Cost: {item.cost} credits | Damage: +{item.damage}</span>
-                                </div>
-                                {!isOwned && (
-                                    <button
-                                        onClick={() => handleBuy(item)}
-                                        disabled={userTime < item.cost}
-                                        className={`buy-button ${userTime < item.cost ? 'disabled' : ''}`}
-                                    >
-                                        {userTime < item.cost ? 'Not enough credits' : 'Buy'}
-                                    </button>
-                                )}
-                                {isOwned && (
-                                    <span className="owned-badge">Owned</span>
-                                )}
+                                <DisplayWeaponCard weapon={item} buying={true} choosing={false}/>
                             </li>
                         );
                     })}
@@ -85,24 +58,7 @@ function Store() {
                 ) : (
                     <ul className="owned-weapons-list">
                         {ownedItems.map(item => (
-                            <li 
-                                key={item.id} 
-                                className={`owned-weapon ${selectedWeapon?.id === item.id ? 'selected' : ''}`}
-                                onClick={() => handleSelect(item)}
-                            >
-                                <div className="weapon-details">
-                                    <span className="weapon-name">{item.name}</span>
-                                    <span className="weapon-damage">+{item.damage} damage</span>
-                                    <span className="weapon-durability">Durability: {item.timeUsed}/{item.durability}</span>
-                                </div>
-                                <div className="weapon-status">
-                                    {selectedWeapon?.id === item.id ? (
-                                        <span className="equipped">EQUIPPED</span>
-                                    ) : (
-                                        <button className="select-weapon-btn">Select</button>
-                                    )}
-                                </div>
-                            </li>
+                            <DisplayWeaponCard weapon={item} buying={false} choosing={true}/>
                         ))}
                     </ul>
                 )}

@@ -80,3 +80,203 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+
+
+/* WEAPON CARD STYLES */
+.weapon-card {
+  background-color: #1e1e1e;
+  border: 2px solid #3e3e3e;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.weapon-card.selected {
+  border-color: #3ba13e;
+  background-color: rgba(59, 161, 62, 0.1);
+}
+
+.weapon-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: white;
+  text-align: center;
+}
+
+.weapon-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.weapon-image {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.weapon-image img {
+  width: 40%;
+  height: 30%;
+  object-fit: contain; /* This ensures the image maintains its aspect ratio */
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.stat-label {
+  color: #aaa;
+}
+
+.stat-value {
+  font-weight: bold;
+}
+
+.BuyButton, .ChooseButton {
+  margin-top: 8px;
+}
+
+button.buy-button, button.choose-button {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #3ba13e;
+  color: black;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+button.buy-button:hover:not(:disabled), 
+button.choose-button:hover:not(.selected) {
+  background-color: #b7ffbb;
+}
+
+button.buy-button:disabled {
+  background-color: #555;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+button.buy-button.owned {
+  background-color: #6e6e6e;
+  cursor: default;
+}
+
+button.choose-button.selected {
+  background-color: #3ba13e;
+}
+
+/* //CHORE CARD STYLES */
+
+.chore-card {
+  background-color: #333;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.chore-card:hover {
+  transform: translateY(-2px);
+}
+
+.chore-card-content {
+  text-align: left;
+}
+
+.chore-name {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.chore-details {
+  display: flex;
+  gap: 16px;
+}
+
+.chore-time, .chore-points {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.chore-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.complete-btn, .remove-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.complete-btn {
+  background-color: #3ba13e;
+}
+
+.complete-btn:hover {
+  background-color: #b7ffbb;
+}
+
+.remove-btn {
+  background-color: #555;
+}
+
+.remove-btn:hover {
+  background-color: #777;
+}
+
+/* USER CARD STYLES */
+
+/* DisplayUser Card Styling */
+.DisplayUserCard {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa2c;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.DisplayUserCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+}
+
+.user-details {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-details span {
+  font-weight: 500;
+  color: #ebf3ff;
+  font-size: 2em;
+}
