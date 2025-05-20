@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUserContext } from "../UserContext";
+import './BattleAnimation.css'; // Import your CSS file for styling
 
 function Battle() {
     // Get state from router
@@ -13,6 +14,7 @@ function Battle() {
         setUserPoints, 
         setUserTime, 
         setSelectedWeapon,
+        selectedWeapon,
         incrementWeaponUsage,
         ownedItems
     } = useUserContext();
@@ -42,7 +44,7 @@ function Battle() {
             setBattleAnimationComplete(true);
             setUserPoints(0); // Update user points
             setUserTime(0); // Update user time
-        }, 1500);
+        }, 2500);
         
         return () => clearTimeout(battleTimer);
     }, [currentUser, opponent]);
@@ -135,8 +137,8 @@ function Battle() {
             <h1>Battle Arena</h1>
             
             <div className="combatants">
-                <div className="combatant user">
-                    <h2>{currentUser.name}</h2>
+                <div className="combatant-user">
+                    <h3>{currentUser.name}</h3>
                     <div className="stats">
                         <p>Base Points: {currentUser.points}</p>
                         {currentUser.weapon && (
@@ -161,8 +163,8 @@ function Battle() {
                 
                 <div className="vs">VS</div>
                 
-                <div className="combatant opponent">
-                    <h2>{opponent.name}</h2>
+                <div className="combatant-opponent">
+                    <h3>{opponent.name}</h3>
                     <div className="stats">
                         <p>Points: {opponent.points}</p>
                         <p className="total-power">Total Power: {opponent.points}</p>
@@ -174,18 +176,18 @@ function Battle() {
                 <div className="battle-animation">
                     <p>Battle in progress...</p>
                     <div className="loading-animation">
-                        <div className="sword-clash"></div>
+                        {/* Removed the sword-clash div since we're using the whole container for shaking */}
                     </div>
                 </div>
             )}
             
             {battleResult && battleAnimationComplete && (
                 <div className="battle-results">
-                    <h2 className={`result-header ${battleResult.winner === currentUser.name ? 'victory' : battleResult.winner === 'tie' ? 'tie' : 'defeat'}`}>
+                    <h3 className={`result-header ${battleResult.winner === currentUser.name ? 'victory' : battleResult.winner === 'tie' ? 'tie' : 'defeat'}`}>
                         {battleResult.winner === "tie" 
                             ? "It's a tie!" 
                             : `${battleResult.winner} wins!`}
-                    </h2>
+                    </h3>
                     
                     <div className="battle-details">
                         <div className="user-result">

@@ -1,0 +1,167 @@
+.battle-arena {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Added to stack content vertically */
+    background-image: url('public/forest.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.battle-arena h1{
+    color: rgb(79, 128, 0);
+    font-size: 3em;
+    text-align: center;
+    margin: 0.5em 0;
+}
+.battle-arena h3{
+    color: rgb(241, 237, 0);
+    font-size: 2em;
+    text-align: center;
+    margin: 0.5em 0;
+}
+
+ .battle-arena p{
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0.2em 0;
+ }
+
+ .combatant-opponent{
+    background-color: rgba(255, 0, 0, 0.315);
+    border-radius: 10px;
+    width: 15em;
+    height: 17em;
+    margin: 1em 1em;
+ }
+
+ .combatant-user{
+    background-color: rgba(255, 0, 0, 0.315);
+    border-radius: 10px;
+    width: 15em;
+    height: 17em;
+    margin: 1em 1em;
+ }
+.combatants {
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    border-radius: 8px;
+    color: white; /* For better readability against dark background */
+}
+
+.battle-results {
+    margin: 1em;
+    display: flex;
+    flex-direction: column; /* Stack result content vertically */
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    border-radius: 8px;
+    color: white; /* For better readability */
+}
+
+/* Screen shake animation */
+@keyframes shake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-5px, -5px) rotate(-1deg); }
+    20% { transform: translate(5px, -5px) rotate(1deg); }
+    30% { transform: translate(-5px, 5px) rotate(0deg); }
+    40% { transform: translate(5px, 5px) rotate(1deg); }
+    50% { transform: translate(-5px, -5px) rotate(-1deg); }
+    60% { transform: translate(5px, -5px) rotate(0deg); }
+    70% { transform: translate(-5px, 5px) rotate(-1deg); }
+    80% { transform: translate(-5px, -5px) rotate(1deg); }
+    90% { transform: translate(5px, 5px) rotate(0deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Apply shake animation to the battle-animation container */
+.battle-animation {
+    animation: shake 0.8s ease-in-out infinite;
+    width: 100%;
+    text-align: center;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Additional styling to enhance the battle experience */
+.vs {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0 1em;
+    color: #ff6b6b;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+}
+
+.victory {
+    color: #4caf50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+}
+
+.defeat {
+    color: #f44336;
+    text-shadow: 0 0 10px rgba(244, 67, 54, 0.7);
+}
+
+.tie {
+    color: #ffc107;
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.7);
+}
+
+.return-button {
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.return-button:hover {
+    background-color: #303f9f;
+}
+
+/* Enhance combatant display */
+.combatant {
+    padding: 1em;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+}
+
+.user {
+    border-left: 4px solid #4caf50;
+}
+
+.opponent {
+    border-left: 4px solid #f44336;
+}
+
+.total-power {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #ffeb3b;
+}
+
+.weapon-info {
+    
+    padding: 0.5em;
+    border-radius: 4px;
+    margin: 0.5em 0;
+}
+
+.weapon-bonus {
+    color: #4caf50;
+}
