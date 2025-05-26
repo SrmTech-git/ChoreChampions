@@ -24,17 +24,26 @@ const ITEMS = [
 
 // Create the provider component
 export function UserProvider({ children }) {
-  // User state
+  // User state - single source of truth for backend sync
   const [user, setUser] = useState({
     name: "Shan",
     email: "shan@email.com", 
-    userId: "1",
-    houseHoldId: 1
+    userId: 1,
+    houseHoldId: 1,
+    userPoints: 5,
+    userTime: 5,
   });
+
+  // Helper functions to update specific user properties
+  const setUserPoints = (newPoints) => {
+    setUser(prev => ({ ...prev, userPoints: newPoints }));
+  };
+
+  const setUserTime = (newTime) => {
+    setUser(prev => ({ ...prev, userTime: newTime }));
+  };
   
   // Game state
-  const [userPoints, setUserPoints] = useState(5);
-  const [userTime, setUserTime] = useState(5);
   const [userChores, setUserChores] = useState([
     { id: 1, name: 'Wash Dishes', time: 15, points: 10 },
     { id: 2, name: 'Vacuum Living Room', time: 20, points: 15 },
@@ -59,8 +68,11 @@ export function UserProvider({ children }) {
     const isConfirmed = window.confirm(`Have you FULLY completed the chore: ${chore.name}?\n(Being dishonest can result in damaged relationships and loss of trust)`);
     
     if (isConfirmed) {
-      setUserPoints(userPoints + chore.points);
-      setUserTime(userTime + chore.time);
+      setUser(prev => ({
+        ...prev,
+        userPoints: prev.userPoints + chore.points,
+        userTime: prev.userTime + chore.time
+      }));
       handleRemoveChore(chore);
     }
   };
@@ -68,11 +80,11 @@ export function UserProvider({ children }) {
   // Item/weapon management functions
   const buyItem = (item) => {
     // Check if user can afford it and doesn't already own it
-    if (userTime >= item.cost && !ownedItems.some(ownedItem => ownedItem.id === item.id)) {
+    if (user.userTime >= item.cost && !ownedItems.some(ownedItem => ownedItem.id === item.id)) {
       // Add to owned items (ensure timeUsed is 0)
       setOwnedItems([...ownedItems, { ...item, timeUsed: 0 }]);
       // Deduct the cost
-      setUserTime(userTime - item.cost);
+      setUserTime(user.userTime - item.cost);
       return true;
     }
     return false;
@@ -137,10 +149,10 @@ export function UserProvider({ children }) {
     user,
     setUser,
     
-    // Points and time
-    userPoints,
+    // Points and time (using user object properties)
+    userPoints: user.userPoints,
+    userTime: user.userTime,
     setUserPoints,
-    userTime,
     setUserTime,
     
     // Chores
