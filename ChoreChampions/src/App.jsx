@@ -1,7 +1,5 @@
 // App.jsx
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './Components/NavBar/NavBar'
 import Footer from './Components/Footer/Footer'
@@ -12,39 +10,103 @@ import Challenge from './Views/Challenge'
 import Battle from './Views/Battle'
 import Login from './Views/Login'
 import Register from './Views/Register'
-import StoreView from './Views/StoreView'
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom'
-import { UserProvider } from './UserContext'
+import ProtectedRoute from './ProtectedRoute'
+import Store from './Components/Store'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { UserProvider, useUserContext } from './UserContext'
 
+// Create a component to handle conditional navbar rendering
+function AppContent() {
+  const { isAuthenticated, isLoading } = useUserContext();
 
+  if (isLoading) {
+    return (
+      <div className="app-loading">
+        <div className="loading-container">
+          <h2>Loading ChoreChampions...</h2>
+          <div className="loading-spinner">Please wait...</div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className='App'>
+      {/* Only show navbar when authenticated */}
+      {isAuthenticated && (
+        <div className="Navbar">
+          <NavBar />
+        </div>
+      )}
+
+      <div className='MainContent'>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          
+          {/* Protected routes */}
+          <Route path="/" element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/chorelist" element={
+            <ProtectedRoute>
+              <ChoreList />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/challenge" element={
+            <ProtectedRoute>
+              <Challenge />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/battle" element={
+            <ProtectedRoute>
+              <Battle />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/store" element={
+            <ProtectedRoute>
+              <Store />
+            </ProtectedRoute>
+          } />
+
+        
+
+          {/* Default redirect */}
+          <Route path="*" element={
+            isAuthenticated ? <Navigate to="/" replace /> : <Navigate to="/login" replace />
+          } />
+        </Routes>
+      </div>
+
+      {/* Only show footer when authenticated */}
+      {isAuthenticated && (
+        <div className='Footer'>
+          <Footer />
+        </div>
+      )}
+    </div>
+  );
+}
 
 function App() {
   return (
     <UserProvider>
-      <BrowserRouter>
-        <div className='App'>
-          <div className="Navbar">
-            <NavBar />
-          </div>
-
-          <div className='MainContent'>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/Dashboard" element={<Dashboard />} />
-              <Route path="/ChoreList" element={<ChoreList />} />
-              <Route path="/Challenge" element={<Challenge/>} />
-              <Route path="/Battle" element={<Battle/> }/>
-              <Route path="/Login" element={<Login/> }/>
-              <Route path="/Register" element={<Register/> }/>
-              <Route path= "/Store" element={<StoreView/> }/>
-            </Routes>
-          </div>
-
-          <div className='Footer'>
-            <Footer />
-          </div>
-        </div>
-      </BrowserRouter>
+      <Router>
+        <AppContent />
+      </Router>
     </UserProvider>
   )
 }

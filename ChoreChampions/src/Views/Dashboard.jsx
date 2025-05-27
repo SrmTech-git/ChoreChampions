@@ -3,6 +3,7 @@ import React from 'react';
 import { useUserContext } from '../UserContext';
 import DisplayWeaponCard from '../Components/DisplayWeaponCard';
 import DisplayChoreCard from '../Components/DisplayChoreCard';
+import DisplayChoreHistory from '../Components/DisplayChoreHistory';
 
 
 function Dashboard() {
@@ -20,6 +21,11 @@ function Dashboard() {
         <div>
             <div>
                 <h2>Welcome to your Dashboard, {user.name}!</h2>
+
+                <div className='display-user-info'>
+                    <DisplayChoreHistory/>
+                </div>
+                
                 <p>Total Points: {userPoints}</p>
                 
                 <h3>Your Chores:</h3>

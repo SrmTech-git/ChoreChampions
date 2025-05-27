@@ -107,6 +107,12 @@ The system uses junction tables to manage many-to-many relationships:
   - Remove chore from user's active list
   - Update user's points and time balance
 
+  #### 4. get Chore history
+- **Endpoint**: `GET /user-chores/History`
+- **Purpose**: Show all completed chores ordered by time stamp
+- **Side Effects**: 
+ 
+
 ### Weapon Management
 
 #### 4. Get All Weapons

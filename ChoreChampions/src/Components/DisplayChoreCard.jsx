@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useUserContext } from '../UserContext';
 
-function DisplayChoreCard({ chore, canAdd, canRemove, canComplete }) {
+function DisplayChoreCard({ chore, canAdd, canRemove, canComplete, hasTime }) {
   // Get handlers directly from UserContext
   const { handleRemoveChore, handleCompleteChore, handleAddChore,userChores } = useUserContext();
   const isChoreAdded = userChores.some(c => c.id === chore.id);
@@ -45,6 +45,11 @@ function DisplayChoreCard({ chore, canAdd, canRemove, canComplete }) {
           >
             Remove
           </button>
+        </div>
+      )}
+      {hasTime && (
+        <div className="chore-card-actions">
+          <span className="time-required"> {new Date(chore.dateCompleted).toLocaleString()} </span>
         </div>
       )}
     </div>

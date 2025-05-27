@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 // Create the context
 const UserContext = createContext();
@@ -22,18 +22,271 @@ const ITEMS = [
     { id: 12, name: 'Giant ToothBrush', cost: 22, damage: 4, durability: 3, timeUsed: 0, image: 'public/toothbrush.png' },
 ];
 
+// JWT utility functions
+const TOKEN_KEY = 'jwt_token';
+
+const getStoredToken = () => {
+  try {
+    return localStorage.getItem(TOKEN_KEY);
+  } catch (error) {
+    console.error('Error accessing localStorage:', error);
+    return null;
+  }
+};
+
+const setStoredToken = (token) => {
+  try {
+    localStorage.setItem(TOKEN_KEY, token);
+  } catch (error) {
+    console.error('Error storing token:', error);
+  }
+};
+
+const removeStoredToken = () => {
+  try {
+    localStorage.removeItem(TOKEN_KEY);
+  } catch (error) {
+    console.error('Error removing token:', error);
+  }
+};
+
+// JWT token validation (basic check)
+const isTokenValid = (token) => {
+  if (!token) return false;
+  
+  try {
+    // Split JWT into parts
+    const parts = token.split('.');
+    if (parts.length !== 3) return false;
+    
+    // Decode payload to check expiration
+    const payload = JSON.parse(atob(parts[1]));
+    const currentTime = Date.now() / 1000;
+    
+    return payload.exp > currentTime;
+  } catch (error) {
+    console.error('Error validating token:', error);
+    return false;
+  }
+};
+
 // Create the provider component
 export function UserProvider({ children }) {
+  // Authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [token, setToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   // User state - single source of truth for backend sync
   const [user, setUser] = useState({
-    name: "Shan",
-    email: "shan@email.com", 
-    password: "password123",
-    userId: 1,
-    houseHoldId: 1,
-    userPoints: 5,
-    userTime: 5,
+    name: "",
+    email: "", 
+    password: "",
+    userId: null,
+    houseHoldId: null,
+    userPoints: 0,
+    userTime: 0,
   });
+
+  // Game state - keep existing logic unchanged
+  const [userChores, setUserChores] = useState([]);
+  const [ownedItems, setOwnedItems] = useState([]);
+  const [selectedWeapon, setSelectedWeapon] = useState(null);
+
+  // Check for existing token on app load
+  useEffect(() => {
+    const checkAuthToken = async () => {
+      // TEMPORARY: Hardcode authenticated user for development
+      const DEVELOPMENT_MODE = true; // Set to false when backend is ready
+      
+      if (DEVELOPMENT_MODE) {
+        // Simulate a logged-in user
+        const mockUser = {
+          name: "Shan",
+          email: "shan@email.com",
+          userId: 1,
+          houseHoldId: 1,
+          userPoints: 25,
+          userTime: 30,
+        };
+        
+        setUser(mockUser);
+        setToken("mock-jwt-token-for-development");
+        setIsAuthenticated(true);
+        setIsLoading(false);
+        return;
+      }
+      
+      // Real authentication logic (for when backend is ready)
+      const storedToken = getStoredToken();
+      
+      if (storedToken && isTokenValid(storedToken)) {
+        setToken(storedToken);
+        setIsAuthenticated(true);
+        
+        // Optionally fetch user data from backend using the token
+        await fetchUserData(storedToken);
+      } else {
+        // Token is invalid or expired
+        if (storedToken) {
+          removeStoredToken();
+        }
+        setIsAuthenticated(false);
+      }
+      
+      setIsLoading(false);
+    };
+
+    checkAuthToken();
+  }, []);
+
+  // Fetch user data from backend (you'll need to implement this endpoint)
+  const fetchUserData = async (authToken) => {
+    try {
+      const response = await fetch('/api/user/profile', {
+        headers: {
+          'Authorization': `Bearer ${authToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+      } else {
+        throw new Error('Failed to fetch user data');
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      // If fetching fails, logout the user
+      logout();
+    }
+  };
+
+  // Login function
+  const login = async (email, password) => {
+    // TEMPORARY: Mock login for development
+    const DEVELOPMENT_MODE = true; // Set to false when backend is ready
+    
+    if (DEVELOPMENT_MODE) {
+      // Simulate successful login
+      const mockUser = {
+        name: "Shan",
+        email: email,
+        userId: 1,
+        houseHoldId: 1,
+        userPoints: 25,
+        userTime: 30,
+      };
+      
+      setUser(mockUser);
+      setToken("mock-jwt-token-for-development");
+      setIsAuthenticated(true);
+      
+      return { success: true };
+    }
+    
+    // Real login logic (for when backend is ready)
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const { token: authToken, user: userData } = data;
+        
+        setToken(authToken);
+        setStoredToken(authToken);
+        setUser(userData);
+        setIsAuthenticated(true);
+        
+        return { success: true };
+      } else {
+        const errorData = await response.json();
+        return { success: false, error: errorData.message || 'Login failed' };
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      return { success: false, error: 'Network error occurred' };
+    }
+  };
+
+  // Register function
+  const register = async (userData) => {
+    // TEMPORARY: Mock registration for development
+    const DEVELOPMENT_MODE = true; // Set to false when backend is ready
+    
+    if (DEVELOPMENT_MODE) {
+      // Simulate successful registration
+      const mockUser = {
+        name: userData.name,
+        email: userData.email,
+        userId: Math.floor(Math.random() * 1000), // Random ID for demo
+        houseHoldId: 1,
+        userPoints: 0,
+        userTime: 0,
+      };
+      
+      setUser(mockUser);
+      setToken("mock-jwt-token-for-development");
+      setIsAuthenticated(true);
+      
+      return { success: true };
+    }
+    
+    // Real registration logic (for when backend is ready)
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const { token: authToken, user: newUser } = data;
+        
+        setToken(authToken);
+        setStoredToken(authToken);
+        setUser(newUser);
+        setIsAuthenticated(true);
+        
+        return { success: true };
+      } else {
+        const errorData = await response.json();
+        return { success: false, error: errorData.message || 'Registration failed' };
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      return { success: false, error: 'Network error occurred' };
+    }
+  };
+
+  // Logout function
+  const logout = () => {
+    setToken(null);
+    removeStoredToken();
+    setIsAuthenticated(false);
+    setUser({
+      name: "",
+      email: "", 
+      password: "",
+      userId: null,
+      houseHoldId: null,
+      userPoints: 0,
+      userTime: 0,
+    });
+    setUserChores([]);
+    setOwnedItems([]);
+    setSelectedWeapon(null);
+  };
 
   // Helper functions to update specific user properties
   const setUserPoints = (newPoints) => {
@@ -43,18 +296,36 @@ export function UserProvider({ children }) {
   const setUserTime = (newTime) => {
     setUser(prev => ({ ...prev, userTime: newTime }));
   };
-  
-  // Game state
-  const [userChores, setUserChores] = useState([
-    { id: 1, name: 'Wash Dishes', time: 15, points: 10 },
-    { id: 2, name: 'Vacuum Living Room', time: 20, points: 15 },
-  ]);
-  
-  // Weapon state
-  const [ownedItems, setOwnedItems] = useState([]);
-  const [selectedWeapon, setSelectedWeapon] = useState(null);
 
-  // Chore management functions
+  // API request wrapper with authentication (for future use)
+  const authenticatedRequest = async (url, options = {}) => {
+    if (!token) {
+      throw new Error('No authentication token available');
+    }
+
+    const authHeaders = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      ...options.headers
+    };
+
+    const response = await fetch(url, {
+      ...options,
+      headers: authHeaders
+    });
+
+    // If token is expired or invalid, logout user
+    if (response.status === 401) {
+      logout();
+      throw new Error('Authentication expired');
+    }
+
+    return response;
+  };
+
+  // ========== EXISTING GAME LOGIC - UNCHANGED ==========
+
+  // Chore management functions - keep existing logic
   const handleAddChore = (chore) => {
     if (!userChores.find(c => c.id === chore.id)) {
       setUserChores([...userChores, chore]);
@@ -78,7 +349,7 @@ export function UserProvider({ children }) {
     }
   };
   
-  // Item/weapon management functions
+  // Item/weapon management functions - keep existing logic
   const buyItem = (item) => {
     // Check if user can afford it and doesn't already own it
     if (user.userTime >= item.cost && !ownedItems.some(ownedItem => ownedItem.id === item.id)) {
@@ -91,12 +362,12 @@ export function UserProvider({ children }) {
     return false;
   };
   
-  // Remove item if it's no longer usable
+  // Remove item if it's no longer usable - keep existing logic
   const handleRemoveItem = (itemId) => {
     setOwnedItems(ownedItems.filter(item => item.id !== itemId));
   };
   
-  // Track weapon usage
+  // Track weapon usage - keep existing logic
   const incrementWeaponUsage = (weaponId) => {
     if (!weaponId) {
       console.log("No weapon ID provided to incrementWeaponUsage");
@@ -146,6 +417,15 @@ export function UserProvider({ children }) {
 
   // Create the context value object with all values and functions to share
   const contextValue = {
+    // Authentication - NEW
+    isAuthenticated,
+    isLoading,
+    token,
+    login,
+    register,
+    logout,
+    authenticatedRequest,
+    
     // User data
     user,
     setUser,
@@ -156,14 +436,14 @@ export function UserProvider({ children }) {
     setUserPoints,
     setUserTime,
     
-    // Chores
+    // Chores - EXISTING LOGIC
     userChores,
     setUserChores,
     handleAddChore,
     handleRemoveChore,
     handleCompleteChore,
     
-    // Battle system
+    // Battle system - EXISTING LOGIC
     ownedItems,
     setOwnedItems,
     buyItem,
