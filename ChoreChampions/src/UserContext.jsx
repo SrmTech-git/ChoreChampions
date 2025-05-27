@@ -28,6 +28,7 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState({
     name: "Shan",
     email: "shan@email.com", 
+    password: "password123",
     userId: 1,
     houseHoldId: 1,
     userPoints: 5,
