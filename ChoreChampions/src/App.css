@@ -1,4 +1,36 @@
-/* Add these styles to reset defaults */
+:root {
+  /* Primary Colors from Image */
+  --color-primary-dark: #1E256C;    /* Dark blue */
+  --color-primary: #3158A4;          /* Primary blue */
+  --color-secondary: #00f2ff;        /* Deep blue/purple */
+  --color-accent: #673397;           /* Purple */
+  --color-accent-light: #BFA1F2;     /* Light purple */
+  
+  /* Derived Colors */
+  --color-background: #0a0e27;       /* Very dark blue */
+  --color-surface: rgba(49, 88, 164, 0.1); /* Primary with opacity */
+  --color-surface-hover: rgba(49, 88, 164, 0.2);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #BFA1F2;   /* Light purple for secondary text */
+  --color-text-muted: rgba(191, 161, 242, 0.7);
+  
+  /* UI Colors */
+  --color-border: rgba(49, 88, 164, 0.3);
+  --color-border-light: rgba(191, 161, 242, 0.2);
+  --color-shadow: rgba(138, 5, 255, 0.3);
+  --color-shadow-hover: rgba(103, 51, 151, 0.3);
+  
+  /* Button Colors */
+  --color-button-primary: #673397;
+  --color-button-primary-hover: #BFA1F2;
+  --color-button-secondary: #3158A4;
+  --color-button-secondary-hover: #4B6FC4;
+  --color-button-danger: #673397;
+  --color-button-danger-hover: #8B4BBB;
+  --color-button-disabled: rgba(49, 88, 164, 0.5);
+}
+
+/* Reset defaults */
 * {
   margin: 0;
   padding: 0;
@@ -11,9 +43,11 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
 }
 
-/* Modify your root element */
+/* Root element */
 #root {
   width: 100%;
   max-width: 100%;
@@ -22,7 +56,7 @@ html, body {
   text-align: center;
 }
 
-/* Your grid should be full width */
+/* Grid layout */
 .App {
   display: grid;
   grid-template-areas: 
@@ -33,35 +67,36 @@ html, body {
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
   width: 100%;
+  background-color: var(--color-background);
 }
 
 .Navbar {
   grid-area: NavBar;
-}
-.MainContent {
-  grid-area: Main;
-}
-.Footer {
-  grid-area: Footer;
+  background-color: var(--color-primary-dark);
 }
 
-/* Main content styles */
 .MainContent {
   grid-area: Main;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: black;
-  color: white;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   width: 100%;
-  padding: 2rem 0; /* Only add vertical padding */
+  padding: 2rem 0;
 }
 
+.Footer {
+  grid-area: Footer;
+  background-color: var(--color-primary-dark);
+}
+
+/* Button styles */
 button {
-  background-color: #3ba13e; /* Green */
+  background-color: var(--color-button-primary);
   border: none;
-  color: black;
+  color: var(--color-text-primary);
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -69,233 +104,243 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-  button:hover {
-    background-color: #b7ffbb;
-  }
+button:hover {
+  background-color: var(--color-button-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--color-shadow-hover);
+}
 
-  /*remove default list styles */
+/* Remove default list styles */
 ul {
   list-style-type: none;
   padding: 0;
 }
 
-
 /* WEAPON CARD STYLES */
 .store-container {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .store-container h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-text-primary);
 }
 
 .time-credits {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 8px;
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 1rem;
+  background: var(--color-surface);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
 }
 
 .credit-amount {
-    color: #28a745;
-    font-weight: bold;
+  color: var(--color-accent-light);
+  font-weight: bold;
 }
 
 .available-weapons h3,
 .owned-weapons-section h3 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-text-primary);
 }
 
 .weaponGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 weapons per row on desktop */
-    gap: 1.5rem;
-    padding: 1rem 0;
-    margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 1rem 0;
+  margin-bottom: 3rem;
 }
 
 .weaponWrapper {
-    background: white;
-    border: 2px solid #ddd;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  backdrop-filter: blur(10px);
 }
 
 .weaponWrapper:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px var(--color-shadow-hover);
+  background: var(--color-surface-hover);
 }
 
 .weapon-card {
-    padding: 1.5rem;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  padding: 1.5rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .weapon-name {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #333;
-    font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+  font-size: 1.1rem;
 }
 
 .weapon-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
 }
 
 .weapon-image {
-    text-align: center;
-    margin-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .weapon-image img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--color-border);
 }
 
 .stat {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    background: #f8f9fa;
-    border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: var(--color-surface);
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
 }
 
 .stat-label {
-    font-weight: 600;
-    color: #555;
+  font-weight: 600;
+  color: var(--color-text-secondary);
 }
 
 .stat-value {
-    font-weight: bold;
-    color: #333;
+  font-weight: bold;
+  color: var(--color-text-primary);
 }
 
-
 .action-button.buy {
-    background-color: #28a745;
-    color: white;
+  background-color: var(--color-button-primary);
+  color: var(--color-text-primary);
 }
 
 .action-button.buy:hover:not(:disabled) {
-    background-color: #218838;
+  background-color: var(--color-button-primary-hover);
 }
 
 .action-button.buy.owned,
 .action-button.buy:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
+  background-color: var(--color-button-disabled);
+  cursor: not-allowed;
 }
 
 .action-button.choose {
-    background-color: #007bff;
-    color: white;
+  background-color: var(--color-button-secondary);
+  color: var(--color-text-primary);
 }
 
 .action-button.choose:hover {
-    background-color: #0056b3;
+  background-color: var(--color-button-secondary-hover);
 }
 
 .action-button.choose.selected {
-    background-color: #28a745;
+  background-color: var(--color-button-primary);
 }
 
 .action-button.remove {
-    background-color: #dc3545;
-    color: white;
+  background-color: var(--color-button-danger);
+  color: var(--color-text-primary);
 }
 
 .action-button.remove:hover {
-    background-color: #c82333;
+  background-color: var(--color-button-danger-hover);
 }
 
 .no-weapons-message {
-    text-align: center;
-    color: #666;
-    font-style: italic;
-    margin: 2rem 0;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 2rem 0;
 }
 
 .battle-weapon-summary {
-    text-align: center;
-    padding: 2rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    margin-top: 2rem;
+  text-align: center;
+  padding: 2rem;
+  background: var(--color-surface);
+  border-radius: 8px;
+  margin-top: 2rem;
+  border: 1px solid var(--color-border);
 }
 
 .selected-weapon-info {
-    color: #28a745;
+  color: var(--color-accent-light);
 }
 
 .no-weapon-selected {
-    color: #666;
-    font-style: italic;
+  color: var(--color-text-muted);
+  font-style: italic;
 }
 
 /* Tablet - 2 weapons per row */
 @media (max-width: 992px) {
-    .weaponGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem;
-    }
+  .weaponGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
 }
 
 /* Mobile - 1 weapon per row */
 @media (max-width: 768px) {
-    .weaponGrid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .store-container {
-        padding: 1rem;
-    }
-    
-    .weapon-image img {
-        width: 100px;
-        height: 100px;
-    }
+  .weaponGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .store-container {
+    padding: 1rem;
+  }
+  
+  .weapon-image img {
+    width: 100px;
+    height: 100px;
+  }
 }
 
-/* //CHORE CARD STYLES */
-
+/* CHORE CARD STYLES */
 .chore-card {
-  background-color: #333;
+  background-color: var(--color-surface);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: var(--color-text-primary);
+  box-shadow: 0 2px 4px var(--color-shadow);
   transition: transform 0.2s ease;
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
 }
 
 .chore-card:hover {
   transform: translateY(-2px);
+  background: var(--color-surface-hover);
 }
 
 .chore-card-content {
@@ -314,7 +359,7 @@ ul {
 
 .chore-time, .chore-points {
   font-size: 0.9rem;
-  color: #ccc;
+  color: var(--color-text-secondary);
 }
 
 .chore-card-actions {
@@ -330,38 +375,37 @@ ul {
 }
 
 .complete-btn {
-  background-color: #3ba13e;
+  background-color: var(--color-button-primary);
 }
 
 .complete-btn:hover {
-  background-color: #b7ffbb;
+  background-color: var(--color-button-primary-hover);
 }
 
 .remove-btn {
-  background-color: #555;
+  background-color: var(--color-primary);
 }
 
 .remove-btn:hover {
-  background-color: #777;
+  background-color: var(--color-button-secondary-hover);
 }
 
 /* USER CARD STYLES */
-
-/* DisplayUser Card Styling */
 .DisplayUserCard {
   display: flex;
   align-items: center;
-  background-color: #f8f9fa2c;
+  background-color: var(--color-surface);
   border-radius: 8px;
   padding: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-shadow);
   transition: transform 0.2s ease;
   margin-bottom: 8px;
+  backdrop-filter: blur(10px);
 }
 
 .DisplayUserCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--color-shadow-hover);
 }
 
 .user-image {
@@ -369,7 +413,7 @@ ul {
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--color-accent-light);
 }
 
 .user-details {
@@ -380,345 +424,345 @@ ul {
 
 .user-details span {
   font-weight: 500;
-  color: #ebf3ff;
+  color: var(--color-text-primary);
   font-size: 2em;
 }
 
 /* Champion card styles */
-
 .championGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 cards per row on desktop */
-    gap: 1.5rem;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .championWrapper {
-    background: white;
-    border: 2px solid #ddd;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(10px);
 }
 
 .championWrapper:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px var(--color-shadow-hover);
+  background: var(--color-surface-hover);
 }
 
 .championCard {
-    padding: 1rem;
-    text-align: center;
+  padding: 1rem;
+  text-align: center;
 }
 
 .championImage {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 0.75rem;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  border: 2px solid var(--color-border);
 }
 
 .championName {
-    margin: 0;
-    font-size: 1rem;
-    color: #333;
-    font-weight: 600;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  font-weight: 600;
 }
-
-
 
 /* Tablet - 3 cards per row */
 @media (max-width: 992px) {
-    .championGrid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-        padding: 1.5rem;
-    }
+  .championGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
 }
 
 /* Small tablet - 2 cards per row */
 @media (max-width: 768px) {
-    .championGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        padding: 1rem;
-    }
+  .championGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
 }
 
 /* Mobile - 1 card per row */
 @media (max-width: 480px) {
-    .championGrid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 1rem;
-    }
-    
-    .championImage {
-        width: 120px;
-        height: 120px;
-    }
+  .championGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .championImage {
+    width: 120px;
+    height: 120px;
+  }
 }
 
-/*UserCard Styles */
-
+/* UserCard Styles */
 .opponents-section h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-text-primary);
 }
 
 .userGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .userWrapper {
-    background: white;
-    border: 2px solid #ddd;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  backdrop-filter: blur(10px);
 }
 
 .userWrapper:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px var(--color-shadow-hover);
+  background: var(--color-surface-hover);
 }
 
-.DisplayUserCard {
-    padding: 1rem;
-    text-align: center;
-    border: none;
-    box-shadow: none;
-    background: transparent;
+.userWrapper .DisplayUserCard {
+  padding: 1rem;
+  text-align: center;
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }
 
-.user-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 0.75rem;
-    border: 3px solid #e9ecef;
+.userWrapper .user-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+  border: 3px solid var(--color-border-light);
 }
 
-.user-details span {
-    font-size: 1rem;
-    color: #333;
-    font-weight: 600;
+.userWrapper .user-details span {
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  font-weight: 600;
 }
 
 .opponent-status {
-    padding: 0.75rem;
-    background: #f8f9fa;
-    border-top: 1px solid #e9ecef;
+  padding: 0.75rem;
+  background: var(--color-primary-dark);
+  border-top: 1px solid var(--color-border);
 }
 
-
 .selected-opponent {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    background-color: #28a745;
-    color: white;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 6px;
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--color-button-primary);
+  color: var(--color-text-primary);
+  text-align: center;
+  font-weight: bold;
+  border-radius: 6px;
 }
 
 .no-opponents-message {
-    text-align: center;
-    color: #666;
-    font-style: italic;
-    margin-top: 2rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-top: 2rem;
 }
 
 /* Tablet - 3 users per row */
 @media (max-width: 992px) {
-    .userGrid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-        padding: 1.5rem;
-    }
+  .userGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
 }
 
 /* Small tablet - 2 users per row */
 @media (max-width: 768px) {
-    .userGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        padding: 1rem;
-    }
+  .userGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
 }
 
 /* Mobile - 1 user per row */
 @media (max-width: 480px) {
-    .userGrid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 1rem;
-    }
-    
-    .user-image {
-        width: 100px;
-        height: 100px;
-    }
+  .userGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .userWrapper .user-image {
+    width: 100px;
+    height: 100px;
+  }
 }
-
-/* Battle Summary */
 
 /* Battle Summary Display Styles */
 .battle-summary-display {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background-color: #f8f9fa;
-    border-radius: 12px;
-    border: 1px solid #e9ecef;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
 }
 
 .battle-summary-display h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #333;
-    font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-text-primary);
+  font-size: 1.5rem;
 }
 
 /* Summary Grid - Mobile First (Vertical Layout) */
 .summary-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 /* Tablet and Desktop - Horizontal Layout */
 @media (min-width: 768px) {
-    .summary-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
+  .summary-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
 }
 
 /* Individual Summary Items */
 .summary-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1.5rem;
-    background-color: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(10px);
 }
 
 .summary-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--color-shadow-hover);
 }
 
 .summary-item h3 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    color: #495057;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 0.5rem;
-    width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.5rem;
+  width: 100%;
 }
 
 /* Not Selected State */
 .not-selected {
-    color: #6c757d;
-    font-style: italic;
-    margin: 0;
-    padding: 2rem 1rem;
-    background-color: #f8f9fa;
-    border: 2px dashed #dee2e6;
-    border-radius: 8px;
-    width: 100%;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0;
+  padding: 2rem 1rem;
+  background-color: var(--color-surface);
+  border: 2px dashed var(--color-border-light);
+  border-radius: 8px;
+  width: 100%;
 }
 
 /* Container Wrappers in Summary */
 .summary-item .userWrapper,
 .summary-item .weaponWrapper,
 .summary-item .championWrapper {
-    width: 100%;
-    max-width: 200px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
 }
 
 /* Points Summary Section */
 .points-summary {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    margin-top: 1rem;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: var(--color-text-primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px var(--color-shadow-hover);
+  margin-top: 1rem;
 }
 
 .points-summary h3 {
-    margin-bottom: 1.5rem;
-    font-size: 1.4rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .points-display {
-    display: grid;
-    gap: 0.5rem;
+  display: grid;
+  gap: 0.5rem;
 }
 
 .points-display p {
-    margin: 0.5rem 0;
-    font-size: 1rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
 }
 
 .total-power {
-    font-weight: bold;
-    font-size: 1.2rem !important;
-    color: #ffd700;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    padding: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    margin-top: 1rem !important;
+  font-weight: bold;
+  font-size: 1.2rem !important;
+  color: var(--color-accent-light);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  margin-top: 1rem !important;
 }
 
 /* Responsive Design for Points Summary */
 @media (min-width: 768px) {
-    .points-display {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        text-align: left;
-    }
-    
-    .total-power {
-        grid-column: span 2;
-        text-align: center;
-    }
+  .points-display {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    text-align: left;
+  }
+  
+  .total-power {
+    grid-column: span 2;
+    text-align: center;
+  }
 }
 
 /* Additional responsive adjustments */
 @media (max-width: 480px) {
-    .battle-summary-display {
-        padding: 1rem;
-    }
-    
-    .summary-item {
-        padding: 1rem;
-    }
-    
-    .points-summary {
-        padding: 1.5rem;
-    }
+  .battle-summary-display {
+    padding: 1rem;
+  }
+  
+  .summary-item {
+    padding: 1rem;
+  }
+  
+  .points-summary {
+    padding: 1.5rem;
+  }
 }

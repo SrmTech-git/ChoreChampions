@@ -25,14 +25,15 @@ function NavBar() {
                     <Link to="/Challenge">Challenge</Link>
                 </div>
                 <div className={styles.navLink}> 
+                    <Link to="/Store">Store</Link>
+                </div>
+                <div className={styles.navLink}> 
                     <Link to="/Login">Login</Link>
                 </div>
                 <div className={styles.navLink}> 
                     <Link to="/Register">Register</Link>
                 </div>
-                <div className={styles.navLink}> 
-                    <Link to="/Store">Store</Link>
-                </div>
+                
             </div>
 
             <div className="user-info">
