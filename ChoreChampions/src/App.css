@@ -572,3 +572,153 @@ ul {
         height: 100px;
     }
 }
+
+/* Battle Summary */
+
+/* Battle Summary Display Styles */
+.battle-summary-display {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+}
+
+.battle-summary-display h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Summary Grid - Mobile First (Vertical Layout) */
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Tablet and Desktop - Horizontal Layout */
+@media (min-width: 768px) {
+    .summary-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Individual Summary Items */
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.summary-item h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #495057;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.5rem;
+    width: 100%;
+}
+
+/* Not Selected State */
+.not-selected {
+    color: #6c757d;
+    font-style: italic;
+    margin: 0;
+    padding: 2rem 1rem;
+    background-color: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    width: 100%;
+}
+
+/* Container Wrappers in Summary */
+.summary-item .userWrapper,
+.summary-item .weaponWrapper,
+.summary-item .championWrapper {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+/* Points Summary Section */
+.points-summary {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    margin-top: 1rem;
+}
+
+.points-summary h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.points-display {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.points-display p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.total-power {
+    font-weight: bold;
+    font-size: 1.2rem !important;
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    margin-top: 1rem !important;
+}
+
+/* Responsive Design for Points Summary */
+@media (min-width: 768px) {
+    .points-display {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        text-align: left;
+    }
+    
+    .total-power {
+        grid-column: span 2;
+        text-align: center;
+    }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 480px) {
+    .battle-summary-display {
+        padding: 1rem;
+    }
+    
+    .summary-item {
+        padding: 1rem;
+    }
+    
+    .points-summary {
+        padding: 1.5rem;
+    }
+}

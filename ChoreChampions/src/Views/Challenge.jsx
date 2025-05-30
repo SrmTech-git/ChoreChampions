@@ -16,6 +16,7 @@ const usersList = [
 ];
 
 function Challenge() {
+
     const { 
         user, 
         userPoints, 
@@ -125,20 +126,11 @@ function Challenge() {
             <h2>Ready For Battle?</h2>
             <div className="battle-summary">
                 <div className="challenger">
-                    <h3>You: {user.name}</h3>
-                    <p>Points: {userPoints}</p>
-                    {selectedWeapon && (
-                        <p>Weapon: {selectedWeapon.name} (+{selectedWeapon.damage} damage)</p>
-                    )}
-                    <p>Total Power: {userPoints + (selectedWeapon ? selectedWeapon.damage : 0)}</p>
+                    
                 </div>
                 
-                <div className="vs">VS</div>
-                
                 <div className="opponent">
-                    <h3>Opponent: {selectedOpponent.name}</h3>
-                    <p>Points: {selectedOpponent.points}</p>
-                    <p>Total Power: {selectedOpponent.points}</p>
+                    
                 </div>
             </div>
             

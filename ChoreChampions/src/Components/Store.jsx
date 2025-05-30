@@ -30,7 +30,7 @@ function Store() {
         <div className="store-container">
             <h2>Silly Weapons Store</h2>
             <div className="time-credits">
-                <h3>Your Time Credits: <span className="credit-amount">{userTime}</span></h3>
+                <h2>Your Time Credits: <span className="credit-amount">{userTime}</span></h2>
             </div>
             
             {/* Available Weapons Section */}
