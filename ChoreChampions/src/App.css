@@ -83,97 +83,200 @@ ul {
 
 
 /* WEAPON CARD STYLES */
-.weapon-card {
-  background-color: #1e1e1e;
-  border: 2px solid #3e3e3e;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-  color: white;
-  transition: all 0.2s ease;
+.store-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.weapon-card.selected {
-  border-color: #3ba13e;
-  background-color: rgba(59, 161, 62, 0.1);
+.store-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.time-credits {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.credit-amount {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.available-weapons h3,
+.owned-weapons-section h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.weaponGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 weapons per row on desktop */
+    gap: 1.5rem;
+    padding: 1rem 0;
+    margin-bottom: 3rem;
+}
+
+.weaponWrapper {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.weaponWrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.weapon-card {
+    padding: 1.5rem;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .weapon-name {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-top: 0;
-  margin-bottom: 12px;
-  color: white;
-  text-align: center;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.1rem;
 }
 
 .weapon-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-grow: 1;
 }
 
 .weapon-image {
-  text-align: center;
-  margin-bottom: 12px;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 .weapon-image img {
-  width: 40%;
-  height: 30%;
-  object-fit: contain; /* This ensures the image maintains its aspect ratio */
-  border-radius: 4px;
-  padding: 8px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .stat {
-  display: flex;
-  justify-content: space-between;
-  padding: 4px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 6px;
 }
 
 .stat-label {
-  color: #aaa;
+    font-weight: 600;
+    color: #555;
 }
 
 .stat-value {
-  font-weight: bold;
+    font-weight: bold;
+    color: #333;
 }
 
-.BuyButton, .ChooseButton {
-  margin-top: 8px;
+
+.action-button.buy {
+    background-color: #28a745;
+    color: white;
 }
 
-button.buy-button, button.choose-button {
-  width: 100%;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: #3ba13e;
-  color: black;
-  border: none;
-  transition: background-color 0.2s;
+.action-button.buy:hover:not(:disabled) {
+    background-color: #218838;
 }
 
-button.buy-button:hover:not(:disabled), 
-button.choose-button:hover:not(.selected) {
-  background-color: #b7ffbb;
+.action-button.buy.owned,
+.action-button.buy:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
 }
 
-button.buy-button:disabled {
-  background-color: #555;
-  color: #aaa;
-  cursor: not-allowed;
+.action-button.choose {
+    background-color: #007bff;
+    color: white;
 }
 
-button.buy-button.owned {
-  background-color: #6e6e6e;
-  cursor: default;
+.action-button.choose:hover {
+    background-color: #0056b3;
 }
 
-button.choose-button.selected {
-  background-color: #3ba13e;
+.action-button.choose.selected {
+    background-color: #28a745;
+}
+
+.action-button.remove {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-button.remove:hover {
+    background-color: #c82333;
+}
+
+.no-weapons-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin: 2rem 0;
+}
+
+.battle-weapon-summary {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.selected-weapon-info {
+    color: #28a745;
+}
+
+.no-weapon-selected {
+    color: #666;
+    font-style: italic;
+}
+
+/* Tablet - 2 weapons per row */
+@media (max-width: 992px) {
+    .weaponGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+/* Mobile - 1 weapon per row */
+@media (max-width: 768px) {
+    .weaponGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .store-container {
+        padding: 1rem;
+    }
+    
+    .weapon-image img {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 /* //CHORE CARD STYLES */
@@ -279,4 +382,193 @@ button.choose-button.selected {
   font-weight: 500;
   color: #ebf3ff;
   font-size: 2em;
+}
+
+/* Champion card styles */
+
+.championGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row on desktop */
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.championWrapper {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.championWrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.championCard {
+    padding: 1rem;
+    text-align: center;
+}
+
+.championImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.championName {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+
+
+/* Tablet - 3 cards per row */
+@media (max-width: 992px) {
+    .championGrid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Small tablet - 2 cards per row */
+@media (max-width: 768px) {
+    .championGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* Mobile - 1 card per row */
+@media (max-width: 480px) {
+    .championGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .championImage {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/*UserCard Styles */
+
+.opponents-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.userGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.userWrapper {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.userWrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.DisplayUserCard {
+    padding: 1rem;
+    text-align: center;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+.user-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+    border: 3px solid #e9ecef;
+}
+
+.user-details span {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.opponent-status {
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+
+.selected-opponent {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.no-opponents-message {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+/* Tablet - 3 users per row */
+@media (max-width: 992px) {
+    .userGrid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Small tablet - 2 users per row */
+@media (max-width: 768px) {
+    .userGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* Mobile - 1 user per row */
+@media (max-width: 480px) {
+    .userGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .user-image {
+        width: 100px;
+        height: 100px;
+    }
 }

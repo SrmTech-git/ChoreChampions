@@ -7,7 +7,7 @@ function Battle() {
     // Get state from router
     const location = useLocation();
     const navigate = useNavigate();
-    const { currentUser, opponent } = location.state || {};
+    const { currentUser, opponent, chosenChampion } = location.state || {};
     
     // Access user context to update points and get real-time weapon data
     const { 
@@ -135,7 +135,19 @@ function Battle() {
     return (
         <div className="battle-arena">
             <h1>Battle Arena</h1>
-            
+                {chosenChampion ? (
+                    <div>
+                        <img className='championImage'
+                            src={chosenChampion.image}
+                            alt={chosenChampion.name} 
+                        />
+                        <p>{chosenChampion.name}</p>
+                    </div>
+                ) : (
+                    <div>
+                        <p>No champion selected</p>
+                    </div>
+                )}
             <div className="combatants">
                 <div className="combatant-user">
                     <h3>{currentUser.name}</h3>

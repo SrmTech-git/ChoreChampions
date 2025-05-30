@@ -2,7 +2,6 @@ import React from 'react';
 import { useUserContext } from "../UserContext";
 import DisplayWeaponCard from './DisplayWeaponCard';
 
-
 function Store() {
     const { 
         userTime, 
@@ -37,17 +36,17 @@ function Store() {
             {/* Available Weapons Section */}
             <div className="available-weapons">
                 <h3>Available Weapons For Purchase:</h3>
-                <ul className="weapons-list">
+                <div className="weaponGrid">
                     {ITEMS.map(item => {
                         const isOwned = ownedItems.some(owned => owned.id === item.id);
                         
                         return (
-                            <li key={item.id} className="weapon-item">
+                            <div key={item.id} className="weaponWrapper">
                                 <DisplayWeaponCard weapon={item} buying={true} choosing={false}/>
-                            </li>
+                            </div>
                         );
                     })}
-                </ul>
+                </div>
             </div>
             
             {/* Owned Weapons Section */}
@@ -56,11 +55,13 @@ function Store() {
                 {ownedItems.length === 0 ? (
                     <p className="no-weapons-message">You don't own any weapons yet. Purchase one from the store above!</p>
                 ) : (
-                    <ul className="owned-weapons-list">
+                    <div className="weaponGrid">
                         {ownedItems.map(item => (
-                            <DisplayWeaponCard weapon={item} buying={false} choosing={true}/>
+                            <div key={item.id} className="weaponWrapper">
+                                <DisplayWeaponCard weapon={item} buying={false} choosing={true}/>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 )}
             </div>
             
