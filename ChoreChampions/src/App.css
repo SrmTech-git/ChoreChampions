@@ -212,7 +212,7 @@ ul {
   height: 80px;
   object-fit: cover;
   border-radius: 8px;
-  border: 2px solid var(--color-border);
+  /* border: 2px solid var(--color-border); */
 }
 
 .stat {
@@ -394,7 +394,7 @@ ul {
 .DisplayUserCard {
   display: flex;
   align-items: center;
-  background-color: var(--color-surface);
+  /* background-color: ; */
   border-radius: 8px;
   padding: 12px;
   box-shadow: 0 2px 4px var(--color-shadow);
@@ -464,7 +464,7 @@ ul {
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 0.75rem;
-  border: 2px solid var(--color-border);
+  /* border: 2px solid var(--color-border); */
 }
 
 .championName {
@@ -523,7 +523,7 @@ ul {
 }
 
 .userWrapper {
-  background: var(--color-surface);
+  /* background: var(--color-surface); */
   border: 2px solid var(--color-border);
   border-radius: 12px;
   overflow: hidden;
@@ -535,7 +535,7 @@ ul {
 .userWrapper:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px var(--color-shadow-hover);
-  background: var(--color-surface-hover);
+  /* background: var(--color-surface-hover); */
 }
 
 .userWrapper .DisplayUserCard {

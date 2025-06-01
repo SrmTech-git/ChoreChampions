@@ -9,7 +9,7 @@ function NavBar() {
     
     return (
         <nav>
-            <div className="logo">ChoreChampions</div>
+          
 
             <div className={styles.navLinks}>
                 <div className={styles.navLink}>
@@ -36,9 +36,7 @@ function NavBar() {
                 
             </div>
 
-            <div className="user-info">
-                {user.name} | {userPoints} points
-            </div>
+           
         </nav>
     );
 }
