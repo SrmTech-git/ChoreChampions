@@ -46,7 +46,7 @@ function AppContent() {
           <Route path="/register" element={<Register />} />
           
           {/* Protected routes */}
-          <Route path="/" element={
+          <Route path="/choreChampions" element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>

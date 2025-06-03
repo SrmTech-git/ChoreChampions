@@ -13,7 +13,7 @@ function NavBar() {
 
             <div className={styles.navLinks}>
                 <div className={styles.navLink}>
-                    <Link to="/">Home</Link>
+                    <Link to="/choreChampions">Home</Link>
                 </div >
                 <div className={styles.navLink}>
                     <Link to="/ChoreList">Chores</Link>
