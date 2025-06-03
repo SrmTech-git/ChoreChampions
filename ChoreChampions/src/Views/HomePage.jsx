@@ -13,21 +13,21 @@ function HomePage() {
             <div className='homeButtonContainer'>
                 <button 
                     className='homeButton'
-                    onClick={() => navigate('/ChoreList')}
+                    onClick={() => navigate('/ChoreChampions/ChoreList')}
                 >
                     Pick Chores
                 </button>
 
                 <button  
                     className='homeButton'
-                    onClick={() => navigate('/Dashboard')}
+                    onClick={() => navigate('/ChoreChampions/Dashboard')}
                 >
                     Dashboard
                 </button>
 
                 <button  
                     className='homeButton'
-                    onClick={() => navigate('/Challenge')}
+                    onClick={() => navigate('/ChoreChampions/Challenge')}
                 >
                     Challenge friends
                 </button>

@@ -42,41 +42,41 @@ function AppContent() {
       <div className='MainContent'>
         <Routes>
           {/* Public routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/ChoreChampions/login" element={<Login />} />
+          <Route path="/ChoreChampions/register" element={<Register />} />
           
           {/* Protected routes */}
-          <Route path="/choreChampions" element={
+          <Route path="/ChoreChampions/" element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>
           } />
           
-          <Route path="/dashboard" element={
+          <Route path="/ChoreChampions/dashboard" element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           } />
           
-          <Route path="/chorelist" element={
+          <Route path="/ChoreChampions/chorelist" element={
             <ProtectedRoute>
               <ChoreList />
             </ProtectedRoute>
           } />
           
-          <Route path="/challenge" element={
+          <Route path="/ChoreChampions/challenge" element={
             <ProtectedRoute>
               <Challenge />
             </ProtectedRoute>
           } />
           
-          <Route path="/battle" element={
+          <Route path="/ChoreChampions/battle" element={
             <ProtectedRoute>
               <Battle />
             </ProtectedRoute>
           } />
           
-          <Route path="/store" element={
+          <Route path="/ChoreChampions/store" element={
             <ProtectedRoute>
               <Store />
             </ProtectedRoute>
@@ -86,7 +86,7 @@ function AppContent() {
 
           {/* Default redirect */}
           <Route path="*" element={
-            isAuthenticated ? <Navigate to="/" replace /> : <Navigate to="/login" replace />
+            isAuthenticated ? <Navigate to="/ChoreChampions/" replace /> : <Navigate to="/ChoreChampions/login" replace />
           } />
         </Routes>
       </div>

@@ -13,25 +13,25 @@ function NavBar() {
 
             <div className={styles.navLinks}>
                 <div className={styles.navLink}>
-                    <Link to="/choreChampions">Home</Link>
+                    <Link to="/ChoreChampions">Home</Link>
                 </div >
                 <div className={styles.navLink}>
-                    <Link to="/ChoreList">Chores</Link>
+                    <Link to="/ChoreChampions/ChoreList">Chores</Link>
                 </div>
                 <div className={styles.navLink}>
-                    <Link to="/Dashboard">Dashboard</Link>
+                    <Link to="/ChoreChampions/Dashboard">Dashboard</Link>
                 </div>
                 <div className={styles.navLink}> 
-                    <Link to="/Challenge">Challenge</Link>
+                    <Link to="/ChoreChampions/Challenge">Challenge</Link>
                 </div>
                 <div className={styles.navLink}> 
-                    <Link to="/Store">Store</Link>
+                    <Link to="/ChoreChampions/Store">Store</Link>
                 </div>
                 <div className={styles.navLink}> 
-                    <Link to="/Login">Login</Link>
+                    <Link to="/ChoreChampions/Login">Login</Link>
                 </div>
                 <div className={styles.navLink}> 
-                    <Link to="/Register">Register</Link>
+                    <Link to="/ChoreChampions/Register">Register</Link>
                 </div>
                 
             </div>
