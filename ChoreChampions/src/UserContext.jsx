@@ -8,18 +8,18 @@ export const useUserContext = () => useContext(UserContext);
 
 // Define weapon items for the entire app
 const ITEMS = [
-    { id: 1, name: 'Wrapping Paper Tube', cost: 5, damage: 2, durability: 1, timeUsed: 0, image: '/tube.png' },
-    { id: 2, name: 'Giant Q-tip', cost: 20, damage: 4, durability: 2, timeUsed: 0, image: '/qTip.png' },
-    { id: 3, name: 'Rubber Chicken', cost: 30, damage: 6, durability: 1, timeUsed: 0, image: '/chicken.png' },
-    { id: 4, name: 'Silly String', cost: 15, damage: 3, durability: 2, timeUsed: 0, image: '/sillyString.png'},
-    { id: 5, name: 'Water Balloon', cost: 25, damage: 5, durability: 1, timeUsed: 0, image: '/waterBalloon.png' },
-    { id: 6, name: 'Feather Duster', cost: 10, damage: 2, durability: 3, timeUsed: 0, image: '/featherDuster.png' },
-    { id: 7, name: 'Bag of Leaves', cost: 12, damage: 1, durability: 4, timeUsed: 0, image: '/bagOfLeaves.png' },
-    { id: 8, name: 'Confetti Cannon', cost: 40, damage: 8, durability: 1, timeUsed: 0, image: '/confettiCanon.png' },
-    { id: 9, name: 'Feather Pillow', cost: 8, damage: 2, durability: 5, timeUsed: 0, image: '/feather.png' },
-    { id: 10, name: 'Pool Noodle', cost: 6, damage: 2, durability: 3, timeUsed: 0, image: '/b7fe0154-3209-4260-8653-104d42483a35.png' },
-    { id: 11, name: 'Giant Foam Finger', cost: 18, damage: 3, durability: 2, timeUsed: 0, image: '/foamFinger.png' },
-    { id: 12, name: 'Giant ToothBrush', cost: 22, damage: 4, durability: 3, timeUsed: 0, image: '/toothbrush.png' },
+    { id: 1, name: 'Wrapping Paper Tube', cost: 5, damage: 2, durability: 1, timeUsed: 0, image: 'tube.png' },
+    { id: 2, name: 'Giant Q-tip', cost: 20, damage: 4, durability: 2, timeUsed: 0, image: 'qTip.png' },
+    { id: 3, name: 'Rubber Chicken', cost: 30, damage: 6, durability: 1, timeUsed: 0, image: 'chicken.png' },
+    { id: 4, name: 'Silly String', cost: 15, damage: 3, durability: 2, timeUsed: 0, image: 'sillyString.png'},
+    { id: 5, name: 'Water Balloon', cost: 25, damage: 5, durability: 1, timeUsed: 0, image: 'waterBalloon.png' },
+    { id: 6, name: 'Feather Duster', cost: 10, damage: 2, durability: 3, timeUsed: 0, image: 'featherDuster.png' },
+    { id: 7, name: 'Bag of Leaves', cost: 12, damage: 1, durability: 4, timeUsed: 0, image: 'bagOfLeaves.png' },
+    { id: 8, name: 'Confetti Cannon', cost: 40, damage: 8, durability: 1, timeUsed: 0, image: 'confettiCanon.png' },
+    { id: 9, name: 'Feather Pillow', cost: 8, damage: 2, durability: 5, timeUsed: 0, image: 'feather.png' },
+    { id: 10, name: 'Pool Noodle', cost: 6, damage: 2, durability: 3, timeUsed: 0, image: 'b7fe0154-3209-4260-8653-104d42483a35.png' },
+    { id: 11, name: 'Giant Foam Finger', cost: 18, damage: 3, durability: 2, timeUsed: 0, image: 'foamFinger.png' },
+    { id: 12, name: 'Giant ToothBrush', cost: 22, damage: 4, durability: 3, timeUsed: 0, image: 'toothbrush.png' },
 ];
 
 // JWT utility functions

@@ -9,10 +9,10 @@ import ChampionCard from '../Components/ChampionCard';
 
 // Example users data (replace with real data or props)
 const usersList = [
-    { name: 'Alice', userId: 4, points: 15, houseHoldId: 1, image: '/alice.png' },
-    { name: 'Bob', userId: 2, points: 20, houseHoldId: 1, image: '/bob.png' },
-    { name: 'Charlie', userId: 3, points: 30, houseHoldId: 2, image: '/charlie.png' },
-    { name: 'Shan', userId: 1, points: 5, houseHoldId: 1, image: '/shan.png' },
+    { name: 'Alice', userId: 4, points: 15, houseHoldId: 1, image: 'alice.png' },
+    { name: 'Bob', userId: 2, points: 20, houseHoldId: 1, image: 'bob.png' },
+    { name: 'Charlie', userId: 3, points: 30, houseHoldId: 2, image: 'charlie.png' },
+    { name: 'Shan', userId: 1, points: 5, houseHoldId: 1, image: 'shan.png' },
 ];
 
 function Challenge() {
