@@ -3,12 +3,12 @@ function DisplayUser({ user }) {
     <div className="DisplayUserCard">
       <img
         className="user-image"
-        src={user?.image}
+        src={user.image}
         alt="User Profile"
         
       />
       <div className="user-details">
-        <span >{user?.name}</span>
+        <span >{user.name}</span>
       </div>
     </div>
   );

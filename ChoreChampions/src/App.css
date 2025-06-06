@@ -92,6 +92,183 @@ html, body {
   background-color: var(--color-primary-dark);
 }
 
+/* RESPONSIVE STYLING*/
+
+/* Add these responsive rules to your existing App.css */
+
+/* Base responsive typography and spacing */
+html {
+  font-size: 16px; /* Desktop base */
+}
+
+/* Tablet adjustments */
+@media (max-width: 992px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .MainContent {
+    padding: 1.5rem 1rem;
+  }
+  
+  /* Adjust button sizes for tablet */
+  button {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+  
+  /* Navigation improvements */
+  .Navbar {
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Store container adjustments */
+  .store-container {
+    padding: 1.5rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .MainContent {
+    padding: 1rem 0.5rem;
+  }
+  
+  /* Mobile-friendly buttons */
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+    margin: 2px 1px;
+  }
+  
+  /* Make sure content doesn't overflow */
+  .App {
+    overflow-x: hidden;
+  }
+  
+  /* Navigation adjustments */
+  .Navbar {
+    padding: 0.5rem;
+  }
+  
+  /* Chore cards mobile optimization */
+  .chore-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 12px;
+  }
+  
+  .chore-card-content {
+    text-align: center;
+  }
+  
+  .chore-details {
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .chore-card-actions {
+    justify-content: center;
+  }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+  
+  .MainContent {
+    padding: 0.75rem 0.25rem;
+  }
+  
+  /* Very small buttons for tiny screens */
+  button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  
+  /* Ensure text doesn't get too small */
+  .chore-name {
+    font-size: 1.1rem;
+  }
+  
+  .user-details span {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* Add these z-index fixes to your App.css */
+
+/* Ensure main content and cards have lower z-index than navigation */
+.MainContent {
+  position: relative;
+  z-index: 1;
+}
+
+.chore-card {
+  position: relative;
+  z-index: 2;
+}
+
+.weaponWrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.championWrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.userWrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.store-container {
+  position: relative;
+  z-index: 1;
+}
+
+.battle-summary-display {
+  position: relative;
+  z-index: 2;
+}
+
+/* Ensure navigation stays on top */
+.Navbar {
+  position: relative;
+  z-index: 10001;
+}
+
+/* Mobile navigation overlay */
+@media (max-width: 768px) {
+  /* Add overlay background when menu is open */
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 /* Button styles */
 button {
   background-color: var(--color-button-primary);
