@@ -52,7 +52,7 @@ function Challenge() {
             weapon: selectedWeapon
         };
         
-        navigate('/Battle', { 
+        navigate('/ChoreChampions/Battle', { 
             state: { 
                 currentUser: currentUserWithData,
                 opponent: selectedOpponent,
