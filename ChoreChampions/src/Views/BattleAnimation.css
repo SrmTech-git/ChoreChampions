@@ -1,48 +1,62 @@
+/* Responsive Battle Arena CSS */
+
 .battle-arena {
     position: relative;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Added to stack content vertically */
+    flex-direction: column;
     background-image: url('forest.jpg');
     background-size: cover;
     background-position: center;
+    padding: 1rem;
 }
-.battle-arena h1{
+
+.battle-arena h1 {
     color: rgb(79, 128, 0);
     font-size: 3em;
     text-align: center;
     margin: 0.5em 0;
 }
-.battle-arena h3{
+
+.battle-arena h3 {
     color: rgb(241, 237, 0);
     font-size: 2em;
     text-align: center;
     margin: 0.5em 0;
 }
 
- .battle-arena p{
+.battle-arena p {
     color: white;
     font-size: 1.5em;
     text-align: center;
     margin: 0.2em 0;
- }
+}
 
- .combatant-opponent{
+.combatant-opponent {
     background-color: rgba(255, 0, 0, 0.315);
     border-radius: 10px;
     width: 15em;
     height: 17em;
-    margin: 1em 1em;
- }
+    margin: 1em;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
- .combatant-user{
+.combatant-user {
     background-color: rgba(255, 0, 0, 0.315);
     border-radius: 10px;
     width: 15em;
     height: 17em;
-    margin: 1em 1em;
- }
+    margin: 1em;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .combatants {
     margin: 1em;
     display: flex;
@@ -51,19 +65,21 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1em;
     border-radius: 8px;
-    color: white; /* For better readability against dark background */
+    color: white;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .battle-results {
     margin: 1em;
     display: flex;
-    flex-direction: column; /* Stack result content vertically */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1em;
     border-radius: 8px;
-    color: white; /* For better readability */
+    color: white;
 }
 
 /* Screen shake animation */
@@ -81,7 +97,6 @@
     100% { transform: translate(0, 0) rotate(0deg); }
 }
 
-/* Apply shake animation to the battle-animation container */
 .battle-animation {
     animation: shake 0.8s ease-in-out infinite;
     width: 100%;
@@ -91,9 +106,10 @@
     color: white;
     font-weight: bold;
     font-size: 1.2em;
+    border-radius: 8px;
+    margin: 1em 0;
 }
 
-/* Additional styling to enhance the battle experience */
 .vs {
     font-size: 2em;
     font-weight: bold;
@@ -133,12 +149,13 @@
     background-color: #303f9f;
 }
 
-/* Enhance combatant display */
 .combatant {
     padding: 1em;
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.3);
     min-width: 200px;
+    flex: 1;
+    max-width: 300px;
 }
 
 .user {
@@ -156,7 +173,6 @@
 }
 
 .weapon-info {
-    
     padding: 0.5em;
     border-radius: 4px;
     margin: 0.5em 0;
@@ -164,4 +180,195 @@
 
 .weapon-bonus {
     color: #4caf50;
+}
+
+.battle-details {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.user-result,
+.opponent-result {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    min-width: 200px;
+    flex: 1;
+    max-width: 300px;
+}
+
+.post-battle-message {
+    text-align: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+/* Tablet Styles */
+@media (max-width: 992px) {
+    .battle-arena h1 {
+        font-size: 2.5em;
+    }
+    
+    .battle-arena h3 {
+        font-size: 1.8em;
+    }
+    
+    .battle-arena p {
+        font-size: 1.3em;
+    }
+    
+    .combatant-opponent,
+    .combatant-user {
+        width: 12em;
+        height: 15em;
+        margin: 0.5em;
+    }
+    
+    .vs {
+        font-size: 1.8em;
+        margin: 0 0.5em;
+    }
+    
+    .combatants {
+        padding: 0.8em;
+        margin: 0.8em;
+    }
+    
+    .battle-results {
+        padding: 0.8em;
+        margin: 0.8em;
+    }
+    
+    .battle-details {
+        gap: 1rem;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .battle-arena {
+        padding: 0.5rem;
+    }
+    
+    .battle-arena h1 {
+        font-size: 2em;
+        margin: 0.3em 0;
+    }
+    
+    .battle-arena h3 {
+        font-size: 1.5em;
+        margin: 0.3em 0;
+    }
+    
+    .battle-arena p {
+        font-size: 1.1em;
+        margin: 0.1em 0;
+    }
+    
+    .combatants {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        margin: 0.5em;
+    }
+    
+    .combatant-opponent,
+    .combatant-user {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        min-height: 12em;
+        margin: 0;
+    }
+    
+    .combatant {
+        min-width: auto;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .vs {
+        font-size: 1.5em;
+        margin: 0.5em 0;
+        order: 2; /* Place VS between combatants */
+    }
+    
+    .user {
+        order: 1;
+    }
+    
+    .opponent {
+        order: 3;
+    }
+    
+    .battle-details {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .user-result,
+    .opponent-result {
+        min-width: auto;
+        width: 100%;
+        max-width: none;
+    }
+    
+    .battle-animation {
+        padding: 0.8em;
+        font-size: 1em;
+    }
+    
+    .return-button {
+        width: 100%;
+        max-width: 280px;
+        padding: 0.8em;
+        font-size: 1.1em;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    .battle-arena h1 {
+        font-size: 1.8em;
+    }
+    
+    .battle-arena h3 {
+        font-size: 1.3em;
+    }
+    
+    .battle-arena p {
+        font-size: 1em;
+    }
+    
+    .combatant-opponent,
+    .combatant-user {
+        min-height: 10em;
+        padding: 0.8rem;
+    }
+    
+    .vs {
+        font-size: 1.3em;
+    }
+    
+    .total-power {
+        font-size: 1.1em;
+    }
+    
+    .weapon-info {
+        padding: 0.3em;
+    }
+    
+    .battle-details {
+        margin: 0.5rem 0;
+    }
+    
+    .user-result,
+    .opponent-result {
+        padding: 0.8rem;
+    }
 }
