@@ -4,7 +4,7 @@
     height: 100%;
     display: flex;
     flex-direction: column; /* Added to stack content vertically */
-    background-image: url('public/forest.jpg');
+    background-image: url('forest.jpg');
     background-size: cover;
     background-position: center;
 }
