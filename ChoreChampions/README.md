@@ -195,7 +195,7 @@ CREATE TABLE weapons (
     cost INTEGER NOT NULL,
     damage INTEGER NOT NULL,
     durability INTEGER NOT NULL,
-    time_used INTEGER DEFAULT 0,
+    durability_used INTEGER DEFAULT 0,
     image text
 );
 
